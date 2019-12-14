@@ -1,6 +1,9 @@
 package gui;
 
 import jeu.Combat;
+import jeu.EtatDuJeu;
+import jeu.Hero;
+import jeu.Monstre;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -12,8 +15,11 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
 
 public class LabyrintheGraphique extends JFrame implements KeyListener {
+
+    private EtatDuJeu jeu;
 
     private static final long serialVersionUID = 1L;
 
@@ -203,9 +209,9 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
 
     private Direction direction;
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         new LabyrintheGraphique();
-    }
+    }*/
 
     public LabyrintheGraphique() {
         super("map");
@@ -219,7 +225,7 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         addKeyListener(this);
-
+        jeu = new EtatDuJeu(new Hero("Link", 100, 10, 10), new HashSet<Monstre>());
     }
 
     public void avancer(Direction direction) {
@@ -295,13 +301,19 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
                         break;
                     case "M":
                         // Ici on dessine un monstre TODO
-                        dessiner(chemin, Color.WHITE, Color.LIGHT_GRAY, g, j, i);
-                        dessinerMonstre(g, Color.black, Color.LIGHT_GRAY,  j, i);
+                        if (jeu.estVivant(new Monstre("", 20, 5, j, i, mapEnCours.hashCode()))) {
+                            dessiner(chemin, Color.WHITE, Color.LIGHT_GRAY, g, j, i);
+                            dessinerMonstre(g, Color.black, Color.LIGHT_GRAY, j, i);
+                            jeu.ajouterMonstre(new Monstre("", 20, 5, j, i, mapEnCours.hashCode()));
+                        }
                         break;
                     case "O":
                         // Ici on dessine un octogone
-                        dessiner(chemin, Color.WHITE, Color.LIGHT_GRAY, g, j, i);
-                        dessiner(octogone, Color.red, Color.LIGHT_GRAY, g, j, i);
+                        if (jeu.estVivant(new Monstre("", 20, 5, j, i, mapEnCours.hashCode()))) {
+                            dessiner(chemin, Color.WHITE, Color.LIGHT_GRAY, g, j, i);
+                            dessiner(octogone, Color.red, Color.LIGHT_GRAY, g, j, i);
+                            jeu.ajouterMonstre(new Monstre("Octogone", 1, 1, j, i, mapEnCours.hashCode()));
+                        }
                         break;
                     case "N":
                         dessiner(chemin, Color.WHITE, Color.LIGHT_GRAY, g, j, i);
@@ -513,7 +525,7 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
         }
         //Monstre
         else if ("M".equals(this.mapEnCours[this.y][this.x])) {
-            new Combat("link", 10, 5, 5, 5);
+            new Combat(jeu.getHero(), jeu.recupererMonstre(new Monstre("", 0, 0, x, y, mapEnCours.hashCode())));
         }
     }
     private void dessinerMonstre(Graphics g, Color couleurFond, Color couleurBord, int j, int i) {
