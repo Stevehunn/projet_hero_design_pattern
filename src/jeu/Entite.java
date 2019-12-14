@@ -1,21 +1,16 @@
 package jeu;
 
 public abstract class Entite {
-    protected int armure;
     //degat= force phisyqint - armure
-    protected int force_physique;
-    protected int degat;
-    protected int vie = 100;
+    protected int force;
+    protected int vie;
     private String nom;
 
 
-    public Entite(String _nom, int _vie) {
-        nom = _nom;
-        vie = _vie;
-    }
-
-    public void setnom(String nom) {
+    public Entite(String nom, int vie, int force) {
         this.nom = nom;
+        this.vie = vie;
+        this.force = force;
     }
 
     public String getnom() {
@@ -26,9 +21,10 @@ public abstract class Entite {
         return vie;
     }
 
-    public void setVie(int Vie) {
-        this.vie = Vie;
-    }
+
+    public abstract boolean subirAction(Action action);
+
+    public abstract Action infligerAction();
 
     public abstract void show(Entite e);
 

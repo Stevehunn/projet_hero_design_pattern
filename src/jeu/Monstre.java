@@ -1,32 +1,47 @@
 package jeu;
 
 public class Monstre extends Entite {
-    private int Force;
-    private int Degat;
+    private int x, y, numMap;
 
-    private int Vie;
-
-    public Monstre(String nom, int vie, int _Force, int _Degat) {
-        super(nom, vie);
-        Force = _Force;
-        Degat = _Degat;
-
+    public Monstre(String nom, int vie, int force, int x, int y, int numMap) {
+        super(nom, vie, force);
+        this.x = x;
+        this.y = y;
+        this.numMap = numMap;
     }
 
-    public void setForce(int Force) {
-        this.Force = Force;
+    int getNumMap() {
+        return numMap;
     }
 
-    public int getforce() {
-        return Force;
+    @Override
+    public boolean equals(Object obj) {
+
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Monstre)) {
+            return false;
+        }
+
+        Monstre toTest = (Monstre) obj;
+        return numMap == toTest.getNumMap();
     }
 
-    public int getDegat() {
-        return Degat;
+    @Override
+    public int hashCode() {
+        return x + y + numMap + super.hashCode();
     }
 
-    public void setDegat(int Degat) {
-        this.Degat = Degat;
+    @Override
+    public boolean subirAction(Action action) {
+        this.vie -= action.degatDefenceur;
+        return vie >= 0;
+    }
+
+    @Override
+    public Action infligerAction() {
+        return null;
     }
 
     @Override
