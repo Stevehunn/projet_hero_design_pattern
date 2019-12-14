@@ -52,14 +52,14 @@ public class Menu extends JFrame {
 
 
         Font font3 = new Font("Times new roman", Font.BOLD, 16);
-        bouton = new JButton(new Launch("Start game"));
+        bouton = new JButton(new Launch("Jouer"));
         bouton.setFont(font3);
         bouton.setBounds(260, 250, 120, 45);
         bouton.setOpaque(false);
         panel.add(bouton);
 
 
-        bouton2 = new JButton("Leave Game");
+        bouton2 = new JButton("Quitter le jeu");
         bouton2.setFont(font3);
         bouton2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
