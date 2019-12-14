@@ -1,28 +1,36 @@
 package jeu;
 
-import utils.Inventaire;
-
-import java.util.Scanner;
-
-//Héritage de la classe jeu.Entite
 public class Combat {
-    public Combat(String _nom, int _vie, int _force_physique, int _degat, int _armure) {
-        super(_nom, _vie);
-        // TODO Auto-generated constructor stub
+    private int numTours;
+    private Entite hero;
+    private Entite monstre;
+    private boolean combatTermine;
+
+    public Combat(String name, int rand0, int rand1, int rand2, int rand3) {
+        this.hero = hero;
+        this.monstre = monstre;
+        numTours = 0;
+        combatTermine = false;
+    }
+
+    private Action phaseJoueur() {
+        return new Action();
+    }
+
+    private Action phaseMonstre() {
+        return new Action();
+    }
+
+    public void run() {
+        while (!combatTermine) {
+            phaseJoueur();
+            phaseMonstre();
+        }
     }
 
 
-    //jeu.Combat
-    public static class CombatJvsM {
-        static int numTour = 0;
-        static Entite hero;
-        static Monstre monstre;
-        static boolean fini = false;
 
-        /*
-        Constructeur
-        */
-        public static void main(String[] args) {
+        /*public static void main(String[] args) {
             hero.getVie(hero);
             monstre.getVie(monstre);
             while (fini = true) {
@@ -51,7 +59,6 @@ public class Combat {
             } else return "Tour du monstre";
         }
 
-
         //Méthode pour afficher les différentes options de combat pour le hero
         public static void option(int choixJ) {
             switch (choixJ) {
@@ -76,6 +83,7 @@ public class Combat {
 		/*System.out.println("Objet \n Fonction non implémenté, vous attaquerez donc par défaut");
 		option(1);
 		*/
+        /*
 
                     System.out.println("Objet \n Ouverture de l'inventaire");
                     int id;
@@ -128,7 +136,7 @@ public class Combat {
 
         }
 
-    }
+    }*/
 }
 
 

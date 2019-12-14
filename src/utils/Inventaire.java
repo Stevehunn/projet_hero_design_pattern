@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 
-public class Inventaire extends Connect {
+public class Inventaire {
     public int id;
 
     public Inventaire(int id) {
@@ -17,10 +17,10 @@ public class Inventaire extends Connect {
 
     }
 
-    public static int[] recupererIntInventaire(int iDperso) {
+    public int[] recupererIntInventaire(int iDperso) {
         String a = "Select * from inventaire where id_personnage=";
         a = a + Integer.toString(iDperso);
-        int[] tab = Connect(a);
+        int[] tab = new ConnectionToDB(a).getResult();
 
         return tab;
     }
