@@ -1,5 +1,7 @@
 package jeu;
 
+import utils.Inventaire;
+
 import java.util.Scanner;
 
 //Héritage de la classe jeu.Entite
