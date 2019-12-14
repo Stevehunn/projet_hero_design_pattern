@@ -17,12 +17,12 @@ public class Hero extends Entite {
     public boolean subirAction(Action action) {
         this.vie -= action.regenLanceur;
         this.vie -= action.degatDefenceur - armure;
-        return vie >= 0;
+        return vie <= 0;
     }
 
     @Override
     public Action infligerAction() {
-        return null;
+        return new Action(1, force, TypeAction.Attaquer);
     }
 
     @Override

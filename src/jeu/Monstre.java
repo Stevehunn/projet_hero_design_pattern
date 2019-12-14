@@ -30,18 +30,18 @@ public class Monstre extends Entite {
 
     @Override
     public int hashCode() {
-        return x + y + numMap + super.hashCode();
+        return x + y + numMap + getnom().hashCode();
     }
 
     @Override
     public boolean subirAction(Action action) {
         this.vie -= action.degatDefenceur;
-        return vie >= 0;
+        return vie <= 0;
     }
 
     @Override
     public Action infligerAction() {
-        return null;
+        return new Action(0, force, TypeAction.Attaquer);
     }
 
     @Override

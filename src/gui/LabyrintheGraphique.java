@@ -305,14 +305,18 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
                             dessiner(chemin, Color.WHITE, Color.LIGHT_GRAY, g, j, i);
                             dessinerMonstre(g, Color.black, Color.LIGHT_GRAY, j, i);
                             jeu.ajouterMonstre(new Monstre("", 20, 5, j, i, mapEnCours.hashCode()));
+                        } else {
+                            dessiner(chemin, Color.WHITE, Color.LIGHT_GRAY, g, j, i);
                         }
                         break;
                     case "O":
                         // Ici on dessine un octogone
-                        if (jeu.estVivant(new Monstre("", 20, 5, j, i, mapEnCours.hashCode()))) {
+                        if (jeu.estVivant(new Monstre("Octogone", 100, 100, j, i, mapEnCours.hashCode()))) {
                             dessiner(chemin, Color.WHITE, Color.LIGHT_GRAY, g, j, i);
                             dessiner(octogone, Color.red, Color.LIGHT_GRAY, g, j, i);
-                            jeu.ajouterMonstre(new Monstre("Octogone", 1, 1, j, i, mapEnCours.hashCode()));
+                            jeu.ajouterMonstre(new Monstre("Octogone", 100, 100, j, i, mapEnCours.hashCode()));
+                        } else {
+                            dessiner(chemin, Color.WHITE, Color.LIGHT_GRAY, g, j, i);
                         }
                         break;
                     case "N":
@@ -327,11 +331,11 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
                         dessiner(chemin, Color.WHITE, Color.LIGHT_GRAY, g, j, i);
                         dessiner(devogele, Color.red, Color.LIGHT_GRAY, g, j, i);
                         break;
-                    case"MA":
+                    case "MA":
                         dessiner(chemin, Color.WHITE, Color.LIGHT_GRAY, g, j, i);
                         dessiner(manel, Color.red, Color.LIGHT_GRAY, g, j, i);
                         break;
-                    case"DA":
+                    case "DA":
                         dessiner(chemin, Color.WHITE, Color.LIGHT_GRAY, g, j, i);
                         dessiner(dab, Color.red, Color.LIGHT_GRAY, g, j, i);
                         break;
@@ -430,7 +434,7 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
                 mapEnCours = map6;
                 numeroMap = 6;
                 x = 3;
-                y=2;
+                y = 2;
             } else if (mapEnCours == map11) {
                 mapEnCours = map7;
                 numeroMap = 7;
@@ -446,11 +450,11 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
             this.repaint();
 
         } else if ("x".equals(this.mapEnCours[this.y][this.x])) {
-            if (numeroMap==11) {
+            if (numeroMap == 11) {
                 mapEnCours = map12;
                 numeroMap = 12;
                 x = 4;
-                y=2;
+                y = 2;
             }
         }
         // B c'est une autre porte
@@ -475,7 +479,7 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
                 mapEnCours = map13;
                 numeroMap = 13;
                 x = 2;
-                y=1;
+                y = 1;
             }
 
             this.repaint();
@@ -491,12 +495,16 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
                 mapEnCours = map1;
                 numeroMap = 1;
                 x = 1;
-                y=2;
+                y = 2;
             }
 
             this.repaint();
         } else if ("O".equals(this.mapEnCours[this.y][this.x])) {
             showDialogo();
+            Combat combat = new Combat(jeu.getHero(), jeu.recupererMonstre(new Monstre("Octogone", 100, 100, y, x, mapEnCours.hashCode())));
+            if (combat.run() instanceof Monstre) {
+                showDialogDefaite();
+            }
         }
         //PNJ
         else if ("N".equals(this.mapEnCours[this.y][this.x])) {
@@ -525,9 +533,13 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
         }
         //Monstre
         else if ("M".equals(this.mapEnCours[this.y][this.x])) {
-            new Combat(jeu.getHero(), jeu.recupererMonstre(new Monstre("", 0, 0, x, y, mapEnCours.hashCode())));
+            Combat combat = new Combat(jeu.getHero(), jeu.recupererMonstre(new Monstre("", 0, 0, x, y, mapEnCours.hashCode())));
+            if (combat.run() instanceof Monstre) {
+                showDialogDefaite();
+            }
         }
     }
+
     private void dessinerMonstre(Graphics g, Color couleurFond, Color couleurBord, int j, int i) {
         try {
             g.drawImage(scale(ImageIO.read(new File(monstre)), TAILLE_CASE, TAILLE_CASE), DEC_GAUCHE + j * TAILLE_CASE,
@@ -639,7 +651,7 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
 
         dialog.add(l);
 
-        JButton bouton = new JButton("Back to the menu");
+        JButton bouton = new JButton("Retour au menu.");
 
         bouton.setFont(font3);
         bouton.setBounds(60, 50, 200, 45);
@@ -657,20 +669,45 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
 
     }
 
-    private void showDialogo()
-
-    {
+    private void showDialogDefaite() {
 
         JDialog dialog = new JDialog(this, Dialog.ModalityType.APPLICATION_MODAL);
         dialog.setLayout(null);
 
-        JLabel l = new JLabel("1V1 Octogone, tes regles c'est mes regles");
+        JLabel l = new JLabel("Vous avez perdu.");
+        l.setBounds(20, 20, 500, 20);
+        dialog.setBounds(650, 350, 300, 300);
+
+        dialog.add(l);
+
+        JButton bouton = new JButton("Retour au menu");
+
+        bouton.setFont(font3);
+        bouton.setBounds(60, 50, 200, 45);
+        bouton.setOpaque(false);
+        bouton.addActionListener(new ActionListener() {//donne une action au bouton
+            public void actionPerformed(ActionEvent e) {
+                dialog.dispose();//dispose() : métode pour kill la fenetre actuel
+                dispose();
+            }
+        });
+
+        dialog.add(bouton);
+        dialog.setVisible(true);
+    }
+
+    private void showDialogo() {
+
+        JDialog dialog = new JDialog(this, Dialog.ModalityType.APPLICATION_MODAL);
+        dialog.setLayout(null);
+
+        JLabel l = new JLabel("1V1 Octogone, tes règles, c'est mes règles");
         l.setBounds(20, 20, 500, 20);
         dialog.setBounds(650, 450, 300, 300);
 
         dialog.add(l);
 
-        JButton bouton = new JButton("Trop simple se jeu.");
+        JButton bouton = new JButton("Trop simple ce jeu.");
 
         bouton.setFont(font3);
         bouton.setBounds(60, 50, 200, 45);
@@ -686,15 +723,13 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
 
     }
 
-    private void showDialogn()
-
-    {
+    private void showDialogn() {
 
         JDialog dialog = new JDialog(this, Dialog.ModalityType.APPLICATION_MODAL);
         dialog.setLayout(null);
 
-        JLabel l = new JLabel("Mr Labroche : j'espere que vous nous avez fais un jeu de qualité ! ");
-        l.setBounds(20,20,500,20);
+        JLabel l = new JLabel("Mr Labroche : j'espère que vous nous avez fait un jeu de qualité ! ");
+        l.setBounds(20, 20, 500, 20);
         dialog.setBounds(650, 450, 500, 300);
 
         dialog.add(l);
@@ -715,9 +750,7 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
 
     }
 
-    private void showDialogd()
-
-    {
+    private void showDialogd() {
 
         JDialog dialog = new JDialog(this, Dialog.ModalityType.APPLICATION_MODAL);
         dialog.setLayout(null);
@@ -744,9 +777,7 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
 
     }
 
-    private void showDialogma()
-
-    {
+    private void showDialogma() {
 
         JDialog dialog = new JDialog(this, Dialog.ModalityType.APPLICATION_MODAL);
         dialog.setLayout(null);
@@ -773,9 +804,7 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
         dialog.setVisible(true);
     }
 
-    private void showDialogB()
-
-    {
+    private void showDialogB() {
 
         JDialog dialog = new JDialog(this, Dialog.ModalityType.APPLICATION_MODAL);
         dialog.setLayout(null);
@@ -802,9 +831,7 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
 
     }
 
-    private void showDialogda()
-
-    {
+    private void showDialogda() {
 
         JDialog dialog = new JDialog(this, Dialog.ModalityType.APPLICATION_MODAL);
         dialog.setLayout(null);
@@ -812,7 +839,7 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
         JLabel l = new JLabel("DabMan : la voie se situe à gauche après la masse verte, ne suivez surtout pas le sens de Manel !");
 
         dialog.setBounds(650, 350, 700, 300);
-        l.setBounds(20,20,500,20);
+        l.setBounds(20, 20, 500, 20);
         dialog.add(l);
 
         JButton bouton = new JButton("Merci Grand maitre du DAB");

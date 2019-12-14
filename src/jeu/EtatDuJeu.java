@@ -22,7 +22,7 @@ public class EtatDuJeu {
     public boolean estVivant(Monstre monstre) {
         if (this.montres.contains(monstre)) {
             for (Monstre elm : this.montres) {
-                if (elm == monstre) {
+                if (elm.equals(monstre)) {
                     return elm.getVie() > 0;
                 }
             }
@@ -38,7 +38,7 @@ public class EtatDuJeu {
     public Monstre recupererMonstre(Monstre monstre) {
         if (this.montres.contains(monstre)) {
             for (Monstre elm : this.montres) {
-                if (elm == monstre) {
+                if (elm.equals(monstre)) {
                     return elm;
                 }
             }
