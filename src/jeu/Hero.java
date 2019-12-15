@@ -19,7 +19,7 @@ public class Hero extends Entite {
 
     @Override
     public boolean subirAction(Action action) {
-        this.vie -= action.degatDefenceur - armure;
+        this.vie -= Math.max((action.degatDefenceur - armure), 0);
         return vie <= 0;
     }
 

@@ -17,7 +17,7 @@ public class Combat {
 
     private void phaseJoueur(LabyrintheGraphique labyrintheGraphique) {
         if (hero.getVie() > 0 && !combatTermine) {
-            hero.setChoix(labyrintheGraphique.showDialogChoixCombat());
+            hero.setChoix(labyrintheGraphique.showDialogChoixCombat(hero.getVie(), monstre.getVie()));
             Action action = hero.infligerAction();
             if (action.getTypeAction() == TypeAction.Fuite) {
                 combatTermine = true;

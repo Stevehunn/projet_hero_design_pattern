@@ -127,7 +127,7 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
 
             {"X", "X", "B", "X", "X"},
 
-            {"X", "_", "_", "_", "X"},
+            {"X", "_", "M", "_", "X"},
 
             {"A", "_", "_", "_", "X"},
 
@@ -149,7 +149,7 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
 
             {"X", "X", "F", "X", "X"},
 
-            {"X", "_", "_", "_", "X"},
+            {"X", "_", "M", "_", "X"},
 
             {"X", "_", "_", "_", "D"},
 
@@ -298,10 +298,10 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
                         break;
                     case "M":
                         // Ici on dessine un monstre TODO
-                        if (jeu.estVivant(new Monstre("", 20, 5, j, i, mapEnCours.hashCode()))) {
+                        if (jeu.estVivant(new Monstre("", 20, 15, j, i, mapEnCours.hashCode()))) {
                             dessiner(chemin, Color.WHITE, Color.LIGHT_GRAY, g, j, i);
                             dessinerMonstre(g, Color.black, Color.LIGHT_GRAY, j, i);
-                            jeu.ajouterMonstre(new Monstre("", 20, 5, j, i, mapEnCours.hashCode()));
+                            jeu.ajouterMonstre(new Monstre("", 20, 15, j, i, mapEnCours.hashCode()));
                         } else {
                             dessiner(chemin, Color.WHITE, Color.LIGHT_GRAY, g, j, i);
                         }
@@ -870,50 +870,8 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
 
     }
 
-    public int showDialogChoixCombat() {
-
-        ChoixCombat dialog = new ChoixCombat(this, Dialog.ModalityType.APPLICATION_MODAL);
-        dialog.setLayout(null);
-
-        JLabel l = new JLabel("Choisissez une action :");
-        l.setBounds(20, 20, 500, 20);
-        dialog.setBounds(650, 350, 360, 150);
-
-        dialog.add(l);
-        JButton boutonAttaquer = new JButton("Attaquer");
-        boutonAttaquer.setFont(font3);
-        boutonAttaquer.setBounds(20, 50, 100, 45);
-        boutonAttaquer.setOpaque(false);
-        boutonAttaquer.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dialog.setTypeAction(0);
-                dialog.dispose();
-            }
-        });
-        dialog.add(boutonAttaquer);
-        JButton boutonObjet = new JButton("Objet");
-        boutonObjet.setFont(font3);
-        boutonObjet.setBounds(125, 50, 100, 45);
-        boutonObjet.setOpaque(false);
-        boutonObjet.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dialog.setTypeAction(1);
-                dialog.dispose();
-            }
-        });
-        dialog.add(boutonObjet);
-        JButton boutonFuite = new JButton("Fuite");
-        boutonFuite.setFont(font3);
-        boutonFuite.setBounds(230, 50, 100, 45);
-        boutonFuite.setOpaque(false);
-        boutonFuite.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dialog.setTypeAction(2);
-                dialog.dispose();
-            }
-        });
-
-        dialog.add(boutonFuite);
+    public int showDialogChoixCombat(int vie, int monstreVie) {
+        ChoixCombat dialog = new ChoixCombat(this, Dialog.ModalityType.APPLICATION_MODAL, font3, vie, monstreVie);
         dialog.setVisible(true);
         return dialog.getTypeAction();
     }
