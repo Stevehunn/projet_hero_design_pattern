@@ -13,16 +13,13 @@ public class Inventaire {
     public Inventaire(int id) {
         this.id = id;
         recupererInventaire(recupererIntInventaire(id));
-
-
     }
 
     public int[] recupererIntInventaire(int iDperso) {
         String a = "Select * from inventaire where id_personnage=";
-        a = a + Integer.toString(iDperso);
-        int[] tab = new ConnectionToDB(a).getResult();
+        a = a + iDperso;
 
-        return tab;
+        return new ConnectionToDB(a).getResult();
     }
 
     public static String[][] recupererInventaire(int[] tableau) {
@@ -39,7 +36,6 @@ public class Inventaire {
         String passwd = "root";
 
         try {
-
             String requete1 = "Select * from objets where id_objet=" + objet1;
 
             Connection conn = DriverManager.getConnection(url, user, passwd);
@@ -49,21 +45,16 @@ public class Inventaire {
             ResultSetMetaData resultMeta = (ResultSetMetaData) result.getMetaData();
 
             while (result.next()) {
-
                 for (int i = 1; i <= 4; i++) {
                     inventaire1[i] = result.getObject(i).toString();
-
                 }
-
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-
         }
 
         try {
-
             String requete2 = "Select * from objets where id_objet=" + objet2;
             Connection conn = DriverManager.getConnection(url, user, passwd);
 
@@ -72,20 +63,15 @@ public class Inventaire {
             ResultSetMetaData resultMeta = (ResultSetMetaData) result1.getMetaData();
 
             while (result1.next()) {
-
                 for (int i = 1; i <= 4; i++) {
                     inventaire2[i] = result1.getObject(i).toString();
-
                 }
-
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-
         }
         try {
-
             String requete3 = "Select * from objets where id_objet=" + objet3;
 
             Connection conn = DriverManager.getConnection(url, user, passwd);
@@ -96,33 +82,22 @@ public class Inventaire {
             ResultSetMetaData resultMeta = (ResultSetMetaData) result2.getMetaData();
 
             while (result2.next()) {
-
                 for (int i = 1; i <= 4; i++) {
                     inventaire3[i] = result2.getObject(i).toString();
-
                 }
-
             }
-
         } catch (Exception e) {
             e.printStackTrace();
-
         }
 
         for (int j = 1; j < inventaire1.length; j++) {
-
             inventaire[0][j] = inventaire1[j];
-
         }
         for (int j = 1; j < inventaire2.length; j++) {
-
             inventaire[1][j] = inventaire2[j];
-
         }
         for (int j = 1; j < inventaire3.length; j++) {
-
             inventaire[2][j] = inventaire3[j];
-
         }
 
         return inventaire;

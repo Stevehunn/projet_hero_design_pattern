@@ -9,16 +9,13 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 
 public class ConnectionToDB {
-    private String url = "jdbc:mysql://localhost:3306/g6"; //partie connexion
-    private String user = "root";
-    private String passwd = "root";
     private int tableau[] = new int[11];
 
-
     public ConnectionToDB(String requete) {
+        final String url = "jdbc:mysql://localhost:3306/g6"; //partie connexion
+        final String user = "root";
+        final String passwd = "root";
         try {
-
-
             Connection conn = DriverManager.getConnection(url, user, passwd);
             // System.out.println("Connexion effective !");
 
@@ -26,20 +23,15 @@ public class ConnectionToDB {
             ResultSet result = state.executeQuery(requete);//requete
             ResultSetMetaData resultMeta = (ResultSetMetaData) result.getMetaData();
 
-
 			   /*   for(int i = 1; i <= resultMeta.getColumnCount(); i++)// prends toutes les lignes set colonnes du tableau
 			        System.out.print("\t" + resultMeta.getColumnName(i).toUpperCase() + "\t *");
 
 			      */
 
             while (result.next()) {
-
                 for (int i = 1; i <= resultMeta.getColumnCount(); i++) {
-
                     tableau[i] = Integer.parseInt(result.getObject(i).toString());
                     // System.out.println(tableau[i]);
-
-
                 }
             }
             /*    while(result.next()){
@@ -50,7 +42,6 @@ public class ConnectionToDB {
 
         } catch (Exception e) {
             e.printStackTrace();
-
         }
     }
 

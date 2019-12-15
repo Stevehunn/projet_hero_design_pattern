@@ -26,11 +26,14 @@ public class Hero extends Entite {
 
     @Override
     public Action infligerAction() {
-        return new Action(1, force, TypeAction.values()[choix]);
-    }
-
-    @Override
-    public void show(Entite e) {
-
+        TypeAction typeAction = TypeAction.values()[choix];
+        if (typeAction == TypeAction.Attaquer)
+            return new Action(1, force, typeAction);
+        else if (typeAction == TypeAction.Objet) {
+            return new Action(0, 0, typeAction);    // TODO gestion inventaire
+        } else if (typeAction == TypeAction.Fuite) {
+            return new Action(20, 0, typeAction);   // TODO gestion de la fuite
+        }
+        return null;
     }
 }

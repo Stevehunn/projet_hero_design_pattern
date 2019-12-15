@@ -3,7 +3,6 @@ package jeu;
 import gui.LabyrintheGraphique;
 
 public class Combat {
-    private int numTours;
     private Hero hero;
     private Monstre monstre;
     private boolean combatTermine;
@@ -12,7 +11,6 @@ public class Combat {
     public Combat(Hero hero, Monstre monstre) {
         this.hero = hero;
         this.monstre = monstre;
-        numTours = 0;
         combatTermine = false;
         gagnant = null;
     }

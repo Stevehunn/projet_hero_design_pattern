@@ -26,8 +26,6 @@ public abstract class Entite {
 
     public abstract Action infligerAction();
 
-    public abstract void show(Entite e);
-
 }
 
 

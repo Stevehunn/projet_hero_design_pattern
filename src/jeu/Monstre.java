@@ -44,10 +44,6 @@ public class Monstre extends Entite {
         return new Action(0, force, TypeAction.Attaquer);
     }
 
-    @Override
-    public void show(Entite e) {
-
-    }
 }
 
 
