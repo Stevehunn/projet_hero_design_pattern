@@ -14,6 +14,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
 
+/**
+ * Classe pour la GUI.
+ */
+
 public class LabyrintheGraphique extends JFrame implements KeyListener {
 
     private EtatDuJeu jeu;

@@ -1,9 +1,8 @@
 package jeu;
 
 /**
- * Classe modélisant une énigme .
+ * Classe modélisant une énigme, non implémenté dans le jeu.
  */
-
 public class Enigme {
     private String nomEnigme;
     private int difficulte;

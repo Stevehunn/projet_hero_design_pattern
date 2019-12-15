@@ -5,6 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Classe qui affiche l'écran titre du jeu.
+ */
 public class Menu extends JFrame {
 
     private static final long serialVersionUID = 1L;
@@ -89,8 +92,7 @@ public class Menu extends JFrame {
         return panel;
     }
 
-    private void showDialog()
-    {
+    private void showDialog() {
         JDialog dialog = new JDialog(this, Dialog.ModalityType.APPLICATION_MODAL);
         dialog.setLayout(null);
         dialog.getContentPane().setBackground(Color.gray);

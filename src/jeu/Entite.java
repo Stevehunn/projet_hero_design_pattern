@@ -1,12 +1,17 @@
 package jeu;
 
+/**
+ * Classe abstraite contenant l'interface commune aux monstres et aux héros.
+ * On considère que les dégats sont égaux à la force phisyque - armure.
+ */
 public abstract class Entite {
-    //degat= force phisyqint - armure
     protected int force;
     protected int vie;
     private String nom;
 
-
+    /**
+     * Constructeur d'Entite.
+     */
     public Entite(String nom, int vie, int force) {
         this.nom = nom;
         this.vie = vie;
@@ -22,8 +27,16 @@ public abstract class Entite {
     }
 
 
+    /**
+     * Méthode abstraite permettant de subir une action sur une entite.
+     *
+     * @return retourne vrai si l'entite a subit l'action.
+     */
     public abstract boolean subirAction(Action action);
 
+    /**
+     * Méthode abstraite permettant d'effectuer une action sur une entite.
+     */
     public abstract Action infligerAction();
 
 }

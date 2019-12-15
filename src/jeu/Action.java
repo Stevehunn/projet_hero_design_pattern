@@ -10,7 +10,7 @@ public class Action {
 
     /**
      * Construteur de la classe Action
-     * Permet de recupérer les paramètre du tour de jeu
+     * Permet de recupérer les paramètres du tour de jeu
      */
     public Action(int degatDefenceur, TypeAction typeAction) {
         this.degatDefenceur = degatDefenceur;

@@ -2,12 +2,18 @@ package jeu;
 
 import gui.LabyrintheGraphique;
 
+/**
+ * Méthode pour séquencer les combats.
+ */
 public class Combat {
     private Hero hero;
     private Monstre monstre;
     private boolean combatTermine;
     private Entite gagnant;
 
+    /**
+     * Méthode pour initialiser le combat entre le héros et le monstre.
+     */
     public Combat(Hero hero, Monstre monstre) {
         this.hero = hero;
         this.monstre = monstre;
@@ -15,6 +21,9 @@ public class Combat {
         gagnant = null;
     }
 
+    /**
+     * Méthode pour séquencer le tour du joueur.
+     */
     private void phaseJoueur(LabyrintheGraphique labyrintheGraphique) {
         if (hero.getVie() > 0 && !combatTermine) {
             hero.setChoix(labyrintheGraphique.showDialogChoixCombat(hero.getVie(), monstre.getVie()));
@@ -29,6 +38,9 @@ public class Combat {
         }
     }
 
+    /**
+     * Méthode pour séquencer le tour du monstre.
+     */
     private void phaseMonstre() {
         if (monstre.getVie() > 0 && !combatTermine) {
             if (hero.subirAction(monstre.infligerAction())) {
@@ -38,6 +50,9 @@ public class Combat {
         }
     }
 
+    /**
+     * Méthode pour terminer le combat et retourner le gagnant.
+     */
     public Entite run(LabyrintheGraphique labyrintheGraphique) {
         while (!combatTermine) {
             phaseJoueur(labyrintheGraphique);

@@ -2,6 +2,9 @@ package jeu;
 
 import java.util.HashSet;
 
+/**
+ * Classe pour vérifier l'état du jeu.
+ */
 public class EtatDuJeu {
     private Hero hero;
     private HashSet<Monstre> montres;
@@ -19,6 +22,9 @@ public class EtatDuJeu {
         this.montres.add(monstre);
     }
 
+    /**
+     * Méthode pour vérifier si un monstre est viavnt.
+     */
     public boolean estVivant(Monstre monstre) {
         if (this.montres.contains(monstre)) {
             for (Monstre elm : this.montres) {
@@ -35,6 +41,9 @@ public class EtatDuJeu {
         return hero;
     }
 
+    /**
+     * Méthode pour récupérer un monstre sur le terrrain.
+     */
     public Monstre recupererMonstre(Monstre monstre) {
         if (this.montres.contains(monstre)) {
             for (Monstre elm : this.montres) {

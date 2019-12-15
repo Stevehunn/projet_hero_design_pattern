@@ -12,6 +12,9 @@ import java.awt.event.ActionListener;
 public class ChoixCombat extends JDialog {
     private int typeAction;
 
+    /**
+     * Méthode pour séquencer le tour de jeu.
+     */
     public ChoixCombat(LabyrintheGraphique labyrintheGraphique, ModalityType applicationModal, Font font3, int vie, int monstreVie) {
         super(labyrintheGraphique, applicationModal);
         setLayout(null);
