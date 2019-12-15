@@ -19,7 +19,6 @@ public class Hero extends Entite {
 
     @Override
     public boolean subirAction(Action action) {
-        this.vie -= action.regenLanceur;
         this.vie -= action.degatDefenceur - armure;
         return vie <= 0;
     }
@@ -28,11 +27,11 @@ public class Hero extends Entite {
     public Action infligerAction() {
         TypeAction typeAction = TypeAction.values()[choix];
         if (typeAction == TypeAction.Attaquer)
-            return new Action(1, force, typeAction);
+            return new Action(force, typeAction);
         else if (typeAction == TypeAction.Objet) {
-            return new Action(0, 0, typeAction);    // TODO gestion inventaire
+            return new Action(0, typeAction);    // TODO gestion inventaire
         } else if (typeAction == TypeAction.Fuite) {
-            return new Action(20, 0, typeAction);   // TODO gestion de la fuite
+            return new Action(0, typeAction);   // TODO gestion de la fuite
         }
         return null;
     }

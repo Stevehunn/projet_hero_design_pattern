@@ -1,9 +1,6 @@
 package gui;
 
-import jeu.Combat;
-import jeu.EtatDuJeu;
-import jeu.Hero;
-import jeu.Monstre;
+import jeu.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -501,8 +498,14 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
             this.repaint();
         } else if ("O".equals(this.mapEnCours[this.y][this.x])) {
             showDialogo();
-            Combat combat = new Combat(jeu.getHero(), jeu.recupererMonstre(new Monstre("Octogone", 100, 100, y, x, mapEnCours.hashCode())));
-            if (combat.run(this) instanceof Monstre) {
+            Combat combat = new Combat(jeu.getHero(), jeu.recupererMonstre(new Monstre("Octogone", 100, 100, x, y, mapEnCours.hashCode())));
+            Entite gagnant = combat.run(this);
+            if (gagnant == null) {
+                dessiner(chemin, Color.WHITE, Color.LIGHT_GRAY, g, x, y);
+                dessiner(octogone, Color.red, Color.LIGHT_GRAY, g, x, y);
+                this.x -= 1;
+                dessinerPersonnage(g);
+            } else if (gagnant instanceof Monstre) {
                 showDialogDefaite();
             }
         }
@@ -535,7 +538,13 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
         else if ("M".equals(this.mapEnCours[this.y][this.x])) {
             if (jeu.estVivant(new Monstre("", 20, 5, x, y, mapEnCours.hashCode()))) {
                 Combat combat = new Combat(jeu.getHero(), jeu.recupererMonstre(new Monstre("", 0, 0, x, y, mapEnCours.hashCode())));
-                if (combat.run(this) instanceof Monstre) {
+                Entite gagnant = combat.run(this);
+                if (gagnant == null) {
+                    dessiner(chemin, Color.WHITE, Color.LIGHT_GRAY, g, x, y);
+                    dessiner(monstre, Color.red, Color.LIGHT_GRAY, g, x, y);
+                    this.x -= 1;
+                    dessinerPersonnage(g);
+                } else if (gagnant instanceof Monstre) {
                     showDialogDefaite();
                 } else {
                     dessiner(chemin, Color.WHITE, Color.LIGHT_GRAY, g, x, y);
@@ -663,7 +672,7 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
         bouton.setOpaque(false);
         bouton.addActionListener(new ActionListener() {//donne une action au bouton
             public void actionPerformed(ActionEvent e) {
-                new Menu();
+                //new Menu();
                 dialog.dispose();//dispose() : métode pour kill la fenetre actuel
 
             }

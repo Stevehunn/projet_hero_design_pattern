@@ -41,7 +41,7 @@ public class Monstre extends Entite {
 
     @Override
     public Action infligerAction() {
-        return new Action(0, force, TypeAction.Attaquer);
+        return new Action(force, TypeAction.Attaquer);
     }
 
 }

@@ -1,12 +1,10 @@
 package jeu;
 
 public class Action {
-    protected int regenLanceur;
     protected int degatDefenceur;
     protected TypeAction typeAction;
 
-    public Action(int regenLanceur, int degatDefenceur, TypeAction typeAction) {
-        this.regenLanceur = regenLanceur;
+    public Action(int degatDefenceur, TypeAction typeAction) {
         this.degatDefenceur = degatDefenceur;
         this.typeAction = typeAction;
     }
@@ -15,11 +13,11 @@ public class Action {
         return degatDefenceur;
     }
 
-    void setRegenLanceur(int regenLanceur) {
-        this.regenLanceur = regenLanceur;
-    }
-
     void setTypeAction(TypeAction typeAction) {
         this.typeAction = typeAction;
+    }
+
+    TypeAction getTypeAction() {
+        return typeAction;
     }
 }

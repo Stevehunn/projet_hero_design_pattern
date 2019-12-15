@@ -19,9 +19,9 @@ public class Menu extends JFrame {
         super("Bienvenue Hero !");
         setLocation(50, 50);
         setSize(720, 650);
-        setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(buildContentPane());
+        setVisible(true);
     }
 
     public static void main(String[] args) {
@@ -52,7 +52,7 @@ public class Menu extends JFrame {
         Font font3 = new Font("Times new roman", Font.BOLD, 16);
         bouton = new JButton(new Launch("Jouer"));
         bouton.setFont(font3);
-        bouton.setBounds(260, 250, 120, 45);
+        bouton.setBounds(260, 250, 150, 45);
         bouton.setOpaque(false);
         panel.add(bouton);
 
@@ -64,7 +64,7 @@ public class Menu extends JFrame {
                 System.exit(0);
             }
         });
-        bouton2.setBounds(560, 540, 120, 45);
+        bouton2.setBounds(500, 540, 150, 45);
         bouton2.setOpaque(false);
         panel.add(bouton2);
 
@@ -87,7 +87,6 @@ public class Menu extends JFrame {
         bgLabel.setOpaque(false);
 
         return panel;
-
     }
 
     private void showDialog()
