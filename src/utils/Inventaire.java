@@ -1,108 +1,59 @@
 package utils;
 
-import com.mysql.jdbc.ResultSetMetaData;
-import com.mysql.jdbc.Statement;
+public class Inventaire extends Connect {
+	public int id;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
+	public Inventaire(int id) {
+		this.id = id;
+		recupererInventaire(recupererIntInventaire(id));
 
-public class Inventaire {
-    public int id;
+	}
 
-    public Inventaire(int id) {
-        this.id = id;
-        recupererInventaire(recupererIntInventaire(id));
-    }
+	public static String[] recupererIntInventaire(int iDperso) {
+		String a = "Select * from inventaire where id_personnage=";
+		a = a + Integer.toString(iDperso);
 
-    public int[] recupererIntInventaire(int iDperso) {
-        String a = "Select * from inventaire where id_personnage=";
-        a = a + iDperso;
+		String[] tab = Connect(a);
 
-        return new ConnectionToDB(a).getResult();
-    }
+		return tab;
 
-    public static String[][] recupererInventaire(int[] tableau) {
-        String inventaire[][] = new String[3][5];
-        String inventaire1[] = new String[5];
-        String inventaire2[] = new String[5];
-        String inventaire3[] = new String[5];
-        int objet1 = tableau[2];
-        int objet2 = tableau[3];
-        int objet3 = tableau[4];
+	}
 
-        String url = "jdbc:mysql://localhost:3306/g6"; // partie connexion
-        String user = "root";
-        String passwd = "root";
+	public static Object[][] recupererInventaire(String[] tableau) {
+		Object inventaire[][] = new Object[3][4];
 
-        try {
-            String requete1 = "Select * from objets where id_objet=" + objet1;
+		String objet1 = tableau[3];
+		String objet2 = tableau[4];
+		String objet3 = tableau[5];
 
-            Connection conn = DriverManager.getConnection(url, user, passwd);
+		try {
 
-            Statement state = (Statement) conn.createStatement();// création objet statement pour recupérer résultat
-            ResultSet result = state.executeQuery(requete1);
-            ResultSetMetaData resultMeta = (ResultSetMetaData) result.getMetaData();
+			String requete1 = "SELECT nom_objet,image,pv,pm FROM objets inner join stats_objets on objets.id_stats=stats_objets.id_stats where id_objet=" + objet1;
+			String requete2 = "SELECT nom_objet,image,pv,pm FROM objets inner join stats_objets on objets.id_stats=stats_objets.id_stats where id_objet=" + objet2;
+			String requete3 = "SELECT nom_objet,image,pv,pm FROM objets inner join stats_objets on objets.id_stats=stats_objets.id_stats where id_objet=" + objet3;
 
-            while (result.next()) {
-                for (int i = 1; i <= 4; i++) {
-                    inventaire1[i] = result.getObject(i).toString();
-                }
-            }
+			Object[] a = Connect(requete1);
+			Object[] b = Connect(requete2);
+			Object[] c = Connect(requete3);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+			for (int j = 0; j < 4; j++) {
 
-        try {
-            String requete2 = "Select * from objets where id_objet=" + objet2;
-            Connection conn = DriverManager.getConnection(url, user, passwd);
+				inventaire[0][j] = a[j + 1];
+				inventaire[1][j] = b[j + 1];
+				inventaire[2][j] = c[j + 1];
 
-            Statement state1 = (Statement) conn.createStatement();// création objet statement pour recupérer résultat
-            ResultSet result1 = state1.executeQuery(requete2);
-            ResultSetMetaData resultMeta = (ResultSetMetaData) result1.getMetaData();
 
-            while (result1.next()) {
-                for (int i = 1; i <= 4; i++) {
-                    inventaire2[i] = result1.getObject(i).toString();
-                }
-            }
+			}
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            String requete3 = "Select * from objets where id_objet=" + objet3;
 
-            Connection conn = DriverManager.getConnection(url, user, passwd);
-            // System.out.println("Connexion effective !");
+		} catch (Exception e) {
+			e.printStackTrace();
 
-            Statement state2 = (Statement) conn.createStatement();// création objet statement pour recupérer résultat
-            ResultSet result2 = state2.executeQuery(requete3);
-            ResultSetMetaData resultMeta = (ResultSetMetaData) result2.getMetaData();
+		}
 
-            while (result2.next()) {
-                for (int i = 1; i <= 4; i++) {
-                    inventaire3[i] = result2.getObject(i).toString();
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+		return inventaire;
 
-        for (int j = 1; j < inventaire1.length; j++) {
-            inventaire[0][j] = inventaire1[j];
-        }
-        for (int j = 1; j < inventaire2.length; j++) {
-            inventaire[1][j] = inventaire2[j];
-        }
-        for (int j = 1; j < inventaire3.length; j++) {
-            inventaire[2][j] = inventaire3[j];
-        }
+	}
 
-        return inventaire;
-
-    }
 
 }
-
