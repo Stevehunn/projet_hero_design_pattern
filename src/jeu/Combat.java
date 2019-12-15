@@ -1,9 +1,11 @@
 package jeu;
 
+import gui.LabyrintheGraphique;
+
 public class Combat {
     private int numTours;
-    private Entite hero;
-    private Entite monstre;
+    private Hero hero;
+    private Monstre monstre;
     private boolean combatTermine;
     private Entite gagnant;
 
@@ -15,9 +17,11 @@ public class Combat {
         gagnant = null;
     }
 
-    private void phaseJoueur() {
+    private void phaseJoueur(LabyrintheGraphique labyrintheGraphique) {
         if (hero.getVie() > 0) {
-            if (monstre.subirAction(hero.infligerAction())) {
+            hero.setChoix(labyrintheGraphique.showDialogChoixCombat());
+            Action action = hero.infligerAction();
+            if (monstre.subirAction(action)) {
                 combatTermine = true;
                 gagnant = hero;
             }
@@ -33,9 +37,9 @@ public class Combat {
         }
     }
 
-    public Entite run() {
+    public Entite run(LabyrintheGraphique labyrintheGraphique) {
         while (!combatTermine) {
-            phaseJoueur();
+            phaseJoueur(labyrintheGraphique);
             phaseMonstre();
         }
         return gagnant;

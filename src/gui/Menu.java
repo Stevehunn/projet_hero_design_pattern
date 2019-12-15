@@ -22,8 +22,6 @@ public class Menu extends JFrame {
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(buildContentPane());
-
-
     }
 
     public static void main(String[] args) {
@@ -93,9 +91,7 @@ public class Menu extends JFrame {
     }
 
     private void showDialog()
-
     {
-
         JDialog dialog = new JDialog(this, Dialog.ModalityType.APPLICATION_MODAL);
         dialog.setLayout(null);
         dialog.getContentPane().setBackground(Color.gray);
@@ -109,7 +105,7 @@ public class Menu extends JFrame {
         a.setBounds(40, 40, 450, 40);
         a.setFont(font3);
         a.setForeground(Color.red);
-        JLabel b = new JLabel("en éspérent que cela vous plaira ! Bisous !");
+        JLabel b = new JLabel("en espérant que cela vous plaira ! Bisous !");
         b.setBounds(50, 80, 400, 50);
         b.setFont(font3);
         b.setForeground(Color.red);
@@ -120,7 +116,6 @@ public class Menu extends JFrame {
         dialog.add(b);
 
         dialog.setVisible(true);
-
     }
 }
 

@@ -502,7 +502,7 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
         } else if ("O".equals(this.mapEnCours[this.y][this.x])) {
             showDialogo();
             Combat combat = new Combat(jeu.getHero(), jeu.recupererMonstre(new Monstre("Octogone", 100, 100, y, x, mapEnCours.hashCode())));
-            if (combat.run() instanceof Monstre) {
+            if (combat.run(this) instanceof Monstre) {
                 showDialogDefaite();
             }
         }
@@ -533,9 +533,14 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
         }
         //Monstre
         else if ("M".equals(this.mapEnCours[this.y][this.x])) {
-            Combat combat = new Combat(jeu.getHero(), jeu.recupererMonstre(new Monstre("", 0, 0, x, y, mapEnCours.hashCode())));
-            if (combat.run() instanceof Monstre) {
-                showDialogDefaite();
+            if (jeu.estVivant(new Monstre("", 20, 5, x, y, mapEnCours.hashCode()))) {
+                Combat combat = new Combat(jeu.getHero(), jeu.recupererMonstre(new Monstre("", 0, 0, x, y, mapEnCours.hashCode())));
+                if (combat.run(this) instanceof Monstre) {
+                    showDialogDefaite();
+                } else {
+                    dessiner(chemin, Color.WHITE, Color.LIGHT_GRAY, g, x, y);
+                    dessinerPersonnage(g);
+                }
             }
         }
     }
@@ -856,6 +861,54 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
         dialog.add(bouton);
         dialog.setVisible(true);
 
+    }
+
+    public int showDialogChoixCombat() {
+
+        ChoixCombat dialog = new ChoixCombat(this, Dialog.ModalityType.APPLICATION_MODAL);
+        dialog.setLayout(null);
+
+        JLabel l = new JLabel("Choisissez une action :");
+        l.setBounds(20, 20, 500, 20);
+        dialog.setBounds(650, 350, 360, 150);
+
+        dialog.add(l);
+        JButton boutonAttaquer = new JButton("Attaquer");
+        boutonAttaquer.setFont(font3);
+        boutonAttaquer.setBounds(20, 50, 100, 45);
+        boutonAttaquer.setOpaque(false);
+        boutonAttaquer.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dialog.setTypeAction(0);
+                dialog.dispose();
+            }
+        });
+        dialog.add(boutonAttaquer);
+        JButton boutonObjet = new JButton("Objet");
+        boutonObjet.setFont(font3);
+        boutonObjet.setBounds(125, 50, 100, 45);
+        boutonObjet.setOpaque(false);
+        boutonObjet.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dialog.setTypeAction(1);
+                dialog.dispose();
+            }
+        });
+        dialog.add(boutonObjet);
+        JButton boutonFuite = new JButton("Fuite");
+        boutonFuite.setFont(font3);
+        boutonFuite.setBounds(230, 50, 100, 45);
+        boutonFuite.setOpaque(false);
+        boutonFuite.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dialog.setTypeAction(2);
+                dialog.dispose();
+            }
+        });
+
+        dialog.add(boutonFuite);
+        dialog.setVisible(true);
+        return dialog.getTypeAction();
     }
 
 
