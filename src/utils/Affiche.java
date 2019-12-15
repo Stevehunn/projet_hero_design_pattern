@@ -1,6 +1,10 @@
 package utils;
 
-
+/**
+ * Classe qui affiche l'inventaire
+ *
+ * @see Inventaire
+ */
 public class Affiche extends Inventaire {
 	public int id;
 

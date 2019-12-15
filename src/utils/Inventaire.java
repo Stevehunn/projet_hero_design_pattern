@@ -1,5 +1,7 @@
 package utils;
-
+/**
+ * Classe qui récupère les objetes contenu dans l'inventaire.
+ */
 public class Inventaire extends Connect {
 	public int id;
 
@@ -9,6 +11,9 @@ public class Inventaire extends Connect {
 
 	}
 
+	/**
+	 * Méthode pour récupérer l'objet qui porte le numéro présent en paramètre
+	 */
 	public static String[] recupererIntInventaire(int iDperso) {
 		String a = "Select * from inventaire where id_personnage=";
 		a = a + Integer.toString(iDperso);
@@ -19,6 +24,9 @@ public class Inventaire extends Connect {
 
 	}
 
+	/**
+	 * Méthode qui récupère le contenu de l'inventaire
+	 */
 	public static Object[][] recupererInventaire(String[] tableau) {
 		Object inventaire[][] = new Object[3][4];
 

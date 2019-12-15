@@ -3,6 +3,9 @@ package utils;
 
 import javax.swing.table.AbstractTableModel;
 
+/**
+ * Classe qui défini la forme de l'inventaire
+ */
 public class Modele extends AbstractTableModel {
     Object donnees[][];
     String titres[];

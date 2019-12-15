@@ -7,6 +7,11 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Classe qui affiche l'inventaire après avoir sélectionné l'action objet
+ *
+ * @see Inventaire
+ */
 public class Table extends JFrame {
     public Object[][] tab;
 

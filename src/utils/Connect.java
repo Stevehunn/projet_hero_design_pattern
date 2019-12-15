@@ -8,7 +8,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 
-
+/**
+ * Classe qui se connecte a la base de donnée
+ */
 public class Connect {
 
     public static String[] Connect(String requete) {
