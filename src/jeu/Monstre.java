@@ -1,5 +1,9 @@
 package jeu;
 
+/**
+ * Classe modélisant un monstre .
+ */
+
 public class Monstre extends Entite {
     private int x, y, numMap;
 

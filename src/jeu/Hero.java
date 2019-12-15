@@ -2,6 +2,11 @@ package jeu;
 
 import utils.Inventaire;
 
+/**
+ * Classe modélisant un héros .
+ *
+ * @see Hero
+ */
 
 public class Hero extends Entite {
     private int armure;

@@ -5,6 +5,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Classe permettant de sélectionner une action parmis les trois proposées
+ */
+
 public class ChoixCombat extends JDialog {
     private int typeAction;
 
