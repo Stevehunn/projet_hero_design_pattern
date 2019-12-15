@@ -516,7 +516,7 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
         // F c'est la fin du jeu
         else if ("F".equals(this.mapEnCours[this.y][this.x])) {
             showDialog();
-            new Menu();//  Repartir au menu
+            //new Menu();//  Repartir au menu
         }
         //PNJ
         else if ("T".equals(this.mapEnCours[this.y][this.x])) {
@@ -652,35 +652,33 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
         // Rien à faire, sinon on va multiplier les déplacements
     }
 
-    private void showDialog()
     //fenètre de dialoge suite aux differentes interaction avec les pnjs
-    {
+    private void showDialog() {
 
         JDialog dialog = new JDialog(this, Dialog.ModalityType.APPLICATION_MODAL);
         dialog.setLayout(null);
 
         JLabel l = new JLabel("Vous êtes enfin sorti !");
         l.setBounds(20, 20, 500, 20);
-        dialog.setBounds(650, 350, 300, 300);
+        dialog.setBounds(650, 350, 300, 200);
 
         dialog.add(l);
 
         JButton bouton = new JButton("Retour au menu.");
 
         bouton.setFont(font3);
-        bouton.setBounds(60, 50, 200, 45);
+        bouton.setBounds(50, 50, 200, 45);
         bouton.setOpaque(false);
         bouton.addActionListener(new ActionListener() {//donne une action au bouton
             public void actionPerformed(ActionEvent e) {
                 //new Menu();
                 dialog.dispose();//dispose() : métode pour kill la fenetre actuel
-
+                dispose();
             }
         });
 
         dialog.add(bouton);
         dialog.setVisible(true);
-
     }
 
     private void showDialogDefaite() {
@@ -690,7 +688,7 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
 
         JLabel l = new JLabel("Vous avez perdu.");
         l.setBounds(20, 20, 500, 20);
-        dialog.setBounds(650, 350, 300, 300);
+        dialog.setBounds(650, 350, 300, 200);
 
         dialog.add(l);
 
@@ -717,14 +715,14 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
 
         JLabel l = new JLabel("1V1 Octogone, tes règles, c'est mes règles");
         l.setBounds(20, 20, 500, 20);
-        dialog.setBounds(650, 450, 300, 300);
+        dialog.setBounds(650, 450, 300, 200);
 
         dialog.add(l);
 
         JButton bouton = new JButton("Trop simple ce jeu.");
 
         bouton.setFont(font3);
-        bouton.setBounds(60, 50, 200, 45);
+        bouton.setBounds(50, 50, 200, 45);
         bouton.setOpaque(false);
         bouton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -744,14 +742,14 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
 
         JLabel l = new JLabel("Mr Labroche : j'espère que vous nous avez fait un jeu de qualité ! ");
         l.setBounds(20, 20, 500, 20);
-        dialog.setBounds(650, 450, 500, 300);
+        dialog.setBounds(650, 450, 430, 200);
 
         dialog.add(l);
 
         JButton bouton = new JButton("Comme toujours ! ");
 
         bouton.setFont(font3);
-        bouton.setBounds(60, 50, 200, 45);
+        bouton.setBounds(100, 50, 200, 45);
         bouton.setOpaque(false);
         bouton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -771,14 +769,14 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
 
         JLabel l = new JLabel("Mr Devogele : Eh non ce n'est pas la sortie! ");
         l.setBounds(20, 20, 500, 20);
-        dialog.setBounds(650, 350, 450, 300);
+        dialog.setBounds(650, 350, 400, 210);
 
         dialog.add(l);
 
         JButton bouton = new JButton("Merci... (j'avais bien compris...)");
 
         bouton.setFont(font3);
-        bouton.setBounds(60, 50, 300, 45);
+        bouton.setBounds(30, 50, 300, 45);
         bouton.setOpaque(false);
         bouton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -798,14 +796,14 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
 
         JLabel l = new JLabel("Manel : Je suis complètement perdue...");
         l.setBounds(20, 20, 500, 20);
-        dialog.setBounds(650, 350, 450, 300);
+        dialog.setBounds(650, 350, 280, 200);
 
         dialog.add(l);
 
         JButton bouton = new JButton("Courage...");
 
         bouton.setFont(font3);
-        bouton.setBounds(60, 50, 120, 45);
+        bouton.setBounds(70, 50, 120, 45);
         bouton.setOpaque(false);
         bouton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -825,14 +823,14 @@ public class LabyrintheGraphique extends JFrame implements KeyListener {
 
         JLabel l = new JLabel("Mr Bisone : Arrêtez de parler ! ");
         l.setBounds(20, 20, 500, 20);
-        dialog.setBounds(650, 450, 300, 300);
+        dialog.setBounds(650, 450, 280, 180);
 
         dialog.add(l);
 
         JButton bouton = new JButton("C'est Jonas !");
 
         bouton.setFont(font3);
-        bouton.setBounds(60, 50, 200, 45);
+        bouton.setBounds(30, 50, 200, 45);
         bouton.setOpaque(false);
         bouton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
