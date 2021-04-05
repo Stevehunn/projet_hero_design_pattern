@@ -38,7 +38,7 @@ public class Hero extends Entite implements Attaquer {
      */
     @Override
     public boolean subirAction(Action action) {
-        this.vie -= Math.max((action.degatDefenceur - armure), 0);
+        this.vie -= Math.max((action.degatDefenceur - (armure + this.equipement.renforceDefence())), 0);
         return vie <= 0;
     }
 
@@ -49,7 +49,7 @@ public class Hero extends Entite implements Attaquer {
     public Action attaquer() {
         TypeAction typeAction = TypeAction.values()[choix];
         if (typeAction == TypeAction.Attaquer)
-            return new Action(force, typeAction);
+            return new Action(force + this.equipement.renforceAttaque(), typeAction);
         else if (typeAction == TypeAction.Objet) {
             return new Action(0, typeAction);    // TODO gestion inventaire
         } else if (typeAction == TypeAction.Fuite) {
