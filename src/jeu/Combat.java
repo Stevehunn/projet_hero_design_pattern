@@ -27,7 +27,7 @@ public class Combat {
     private void phaseJoueur(LabyrintheGraphique labyrintheGraphique) {
         if (hero.getVie() > 0 && !combatTermine) {
             hero.setChoix(labyrintheGraphique.showDialogChoixCombat(hero.getVie(), monstre.getVie()));
-            Action action = hero.infligerAction();
+            Action action = hero.attaquer();
             if (action.getTypeAction() == TypeAction.Fuite) {
                 combatTermine = true;
             }
@@ -43,7 +43,7 @@ public class Combat {
      */
     private void phaseMonstre() {
         if (monstre.getVie() > 0 && !combatTermine) {
-            if (hero.subirAction(monstre.infligerAction())) {
+            if (hero.subirAction(monstre.attaquer())) {
                 combatTermine = true;
                 gagnant = monstre;
             }
