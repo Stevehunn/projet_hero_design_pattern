@@ -34,11 +34,6 @@ public abstract class Entite {
      */
     public abstract boolean subirAction(Action action);
 
-    /**
-     * Méthode abstraite permettant d'effectuer une action sur une entite.
-     */
-    public abstract Action infligerAction();
-
 }
 
 

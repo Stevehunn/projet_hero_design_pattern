@@ -6,7 +6,7 @@ package jeu;
  *
  * @see Entite
  */
-public class Monstre extends Entite {
+public class Monstre extends Entite implements Attaquer {
     private int x, y, numMap;
 
     public Monstre(String nom, int vie, int force, int x, int y, int numMap) {
@@ -57,10 +57,9 @@ public class Monstre extends Entite {
     }
 
     @Override
-    public Action infligerAction() {
+    public Action attaquer() {
         return new Action(force, TypeAction.Attaquer);
     }
-
 }
 
 

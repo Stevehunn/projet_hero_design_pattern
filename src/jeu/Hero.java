@@ -9,7 +9,7 @@ import utils.Inventaire;
  * @see Entite
  */
 
-public class Hero extends Entite {
+public class Hero extends Entite implements Attaquer {
     private int armure;
     private Inventaire inventaire;
     private int choix;
@@ -39,7 +39,7 @@ public class Hero extends Entite {
      * Méthode permettant d'effectuer un choix et ainsi de définir l'Action a effectuer.
      */
     @Override
-    public Action infligerAction() {
+    public Action attaquer() {
         TypeAction typeAction = TypeAction.values()[choix];
         if (typeAction == TypeAction.Attaquer)
             return new Action(force, typeAction);
