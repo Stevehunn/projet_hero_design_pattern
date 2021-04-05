@@ -13,10 +13,17 @@ public class Hero extends Entite implements Attaquer {
     private int armure;
     private Inventaire inventaire;
     private int choix;
+    private BoostStat equipement;
 
     public Hero(String nom, int vie, int force, int armure) {
         super(nom, vie, force);
         this.armure = armure;
+        this.equipement = new BaseEquipement();
+    }
+
+    void ajouterEquipement(Equipement equipement) {
+        equipement.placerBaseEquipement(this.equipement);
+        this.equipement = equipement;
     }
 
     void setChoix(int choix) {
